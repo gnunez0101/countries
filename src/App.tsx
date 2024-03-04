@@ -9,26 +9,24 @@ import './App.css'
 function App() {
 
   const html = document.getElementsByTagName('html')
+  const urlCountries = 'https://restcountries.com/v3.1/all'
 
-  const urlData = 'https://restcountries.com/v3.1/all'
   const [countries, setCountries] = useState<any>()
   const [countriesCopy, setCountriesCopy] = useState<any>()
   const [darkMode, setDarkMode] = useState(true)
   const [userInput, setUserInput] = useState("")
-  const inputValue = useRef<any>(null)
   const [selectedCountry, setSelectedCountry] = useState<any>()
-  
+
+  const inputValue = useRef<any>(null)
   const windowSize = useRef(0);
 
   useEffect(() => {
-
     const compareNames = (a: any, b:any) => {
       if (a.name.common > b.name.common) return  1
       if (a.name.common < b.name.common) return -1
       return 0    
     }
-
-    fetch(urlData)
+    fetch(urlCountries)
       .then(response => response.json())
       .then(data     => {
         const newData = data.toSorted(compareNames)
@@ -36,7 +34,6 @@ function App() {
         setCountriesCopy(newData)
       })
       .catch(error   => console.error(error))
-
     setDarkMode(localStorage.getItem("dark-mode") === "enabled");  // Check and set dark mode
     const handleResize = () => { windowSize.current = window.innerWidth }
     windowSize.current = window.innerWidth;
@@ -64,9 +61,7 @@ function App() {
   const Country = ({country} : {country:any}) => {
     const formattedPopulation = country.population.toLocaleString('en-US')
     return (
-      <div className="country-box" onClick={() => {
-          setSelectedCountry(country)
-        }}>
+      <div className="country-box" onClick={() => { setSelectedCountry(country) }}>
         <section className="flag">
           <img src={country.flags.png} alt="flag" />
         </section>
@@ -80,10 +75,6 @@ function App() {
     )
   }
 
-  const handleBack = () => {
-    setSelectedCountry(null)
-  }
-
   function Detail({country} : {country:any}) {
     // Extracting Native Name. If no native name, Common is used:
     let nativeName = ''
@@ -91,9 +82,7 @@ function App() {
       const objNativeName = country.name.nativeName
       nativeName = objNativeName[Object.keys(objNativeName)[0]].common
     }
-    else {
-      nativeName = country.name.common
-    }
+    else { nativeName = country.name.common }
     // Formatting population number:
     const formattedPopulation = country.population.toLocaleString('en-US')
     // Extracting Sub Region, if any:
@@ -129,7 +118,7 @@ function App() {
 
     return <article className="detail">
       <section className="back">
-        <button onClick={handleBack}><MdOutlineKeyboardBackspace />Back</button>
+        <button onClick={() => setSelectedCountry(null)}><MdOutlineKeyboardBackspace />Back</button>
       </section>
       <section className="country-details">
         <div className="details-flag"><img src={country.flags.png} alt="flag" /></div>
@@ -185,10 +174,6 @@ function App() {
     inputValue.current.value = ""
   }
 
-  const handleSearch = (e: any) => {
-    setUserInput(e.target.value)
-  }
-
   return (
     <main className={theme}>
 
@@ -209,7 +194,7 @@ function App() {
               <span className='loupe'><IoMdSearch /></span>
               <input type="text"
                 placeholder='Search for a country...'
-                onChange={handleSearch}
+                onChange={(e) => setUserInput(e.target.value)}
                 ref={inputValue}
               />
             </div>
