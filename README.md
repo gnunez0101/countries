@@ -37,10 +37,10 @@ Users should be able to:
 ![](./screenshots/desktop-main-light.png)
 ![](./screenshots/desktop-detail-dark.png)
 ![](./screenshots/desktop-detail-light.png)
-![](./screenshots/mobile-main-dark.png | width=375)
-![](./screenshots/mobile-main-light.png | width=375)
-![](./screenshots/mobile-detail-dark.png | width=375)
-![](./screenshots/mobile-detail-light.png | width=375)
+<img src="./screenshots/mobile-main-dark.png" width="375">
+<img src="./screenshots/mobile-main-light.png" width="375">
+<img src="./screenshots/mobile-detail-dark.png" width="375">
+<img src="./screenshots/mobile-detail-light.png" width="375">
 
 ### Links
 
