@@ -178,9 +178,7 @@ function App() {
     <main className={theme}>
 
       <header className={`header${selectedCountry ? '-detail' : ''}`}>
-        <section className="title">
-          Where in the World?
-        </section>
+        <h1 className="title">Where in the World?</h1>
         <section className="dark-toggle"
           onClick={() => {setDarkMode(!darkMode)}}>
           {darkMode ? <IoMoon/> : <IoMoonOutline/>}<span>Dark Mode</span>
@@ -192,7 +190,7 @@ function App() {
           <article className="filters">
             <div className="search">
               <span className='loupe'><IoMdSearch /></span>
-              <input type="text"
+              <input type="text" aria-label='Search'
                 placeholder='Search for a country...'
                 onChange={(e) => setUserInput(e.target.value)}
                 ref={inputValue}
@@ -201,6 +199,7 @@ function App() {
             <Select options={regions} placeholder={'Filter by Region'}
               onChange={handleRegion}
               className='region-select-container' classNamePrefix='region-select'
+              aria-label='Select Region'
             />
           </article>
           <article className='countries'>
