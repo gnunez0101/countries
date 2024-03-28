@@ -198,7 +198,8 @@ function App() {
             </div>
             <Select options={regions} placeholder={'Filter by Region'}
               onChange={handleRegion}
-              className='region-select-container' classNamePrefix='region-select'
+              className='region-select-container' 
+              classNamePrefix='region-select'
               aria-label='Select Region'
             />
           </article>
